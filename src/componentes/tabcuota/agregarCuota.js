@@ -28,17 +28,76 @@ export const AgregarCuota = ({ id_persona }) => {
     const [isLoad, setIsLoad] = useState(false)
 
     const agregarCuota = async () => {
-        setIsLoad(true)
-        try {
-            const response = await registrarCuota(cuota)
-            setIsLoad(false)
-            setCuota({})
-            alert("Registro correcto!")
-        } catch (error) {
-            setIsLoad(false)
-            alert("Error!!")
-            console.log(error)
+        let { mensaje, status } = validarInputsCuota()
+        if (!status) {
+            setIsLoad(true)
+            try {
+                const response = await registrarCuota(cuota)
+                setIsLoad(false)
+                setCuota({
+                    inicio: "",
+                    fin: "",
+                    id_persona: id_persona,
+                    n_pre: 0,
+                    n_post: 0,
+                    p_pre: 0,
+                    p_post: 0
+                })
+                alert("Registro correcto!")
+            } catch (error) {
+                setIsLoad(false)
+                alert("Error!!")
+                console.log(error)
+            }
+        } else {
+            alert(mensaje)
         }
+    }
+
+    function isDate(str) {
+        var parms = str.split(/[\.\-\/]/);
+        var yyyy = parseInt(parms[0], 10);
+        var mm = parseInt(parms[1], 10);
+        var dd = parseInt(parms[2], 10);
+        var date = new Date(yyyy, mm - 1, dd, 0, 0, 0, 0);
+        return mm === (date.getMonth() + 1) && dd === date.getDate() && yyyy === date.getFullYear();
+    }
+    const validarInputsCuota = () => {
+        let response = {
+            mensaje: "Complete los siguientes datos:\n",
+            status: false
+        }
+        if (!isDate(cuota?.inicio)) {
+            response.mensaje += "- Fecha de inicio\n"
+            response.status = true
+        }
+        if (!isDate(cuota?.fin)) {
+            response.mensaje += "- Fecha de fin\n"
+            response.status = true
+        }
+        if (!cuota?.n_post) {
+            response.mensaje += "- Nueva linea post pago\n"
+            response.status = true
+        }
+        if (!cuota?.n_pre) {
+            response.mensaje += "- Nueva linea pre pago\n"
+            response.status = true
+        }
+        if (!cuota?.p_post) {
+            response.mensaje += "- Portabilidad post pago\n"
+            response.status = true
+        }
+        if (!cuota?.p_pre) {
+            response.mensaje += "- Portabilidad pre pago\n"
+            response.status = true
+        }
+
+        if (new Date(cuota?.fin.split("/").join("-")).getTime() < new Date(cuota?.inicio.split("/").join("-")).getTime()) {
+            response.mensaje += "- Fecha de fin menor que inicio\n"
+            response.status = true
+        }
+
+        return response
     }
 
     return (
