@@ -131,7 +131,7 @@ export const Persona = () => {
             response.mensajeUs += "- Contraseña\n"
             response.statusUs = true
         }
-        if (!persona.tipoUsuario) {
+        if (!usuario.tipoUsuario) {
             response.mensajeUs += "- Tipo de usuario\n"
             response.statusUs = true
         }
