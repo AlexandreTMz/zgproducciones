@@ -53,29 +53,59 @@ export default function EditarUsuarioModal({ modalVisible, setModalVisible, id_p
 
     const [isLoad, setIsLoad] = useState(false)
 
+    const validarInputsUsuario = () => {
+        let response = {
+            mensajeUs: "Complete los siguientes datos:\n",
+            statusUs: false
+        }
+        if (!usuario.usuario) {
+            response.mensajeUs += "- Usuario\n"
+            response.statusUs = true
+        }
+        if (!usuario.contrasenia) {
+            response.mensajeUs += "- Contraseña\n"
+            response.statusUs = true
+        }
+        if (!usuario.us_tipo) {
+            response.mensajeUs += "- Tipo de usuario\n"
+            response.statusUs = true
+        }
+        return response
+    }
+
     const registrarEditarUsuario = async () => {
+        let { mensajeUs, statusUs } = validarInputsUsuario()
+
         if (usuario?.id_usuarios) {
-            setIsLoad(true)
-            try {
-                const response = await actualizarUsuarioSolo(usuario)
-                alert("Actualizacion correcta!!")
-                setIsLoad(false)
-            } catch (error) {
-                alert("Error!!")
-                setIsLoad(false)
+            if (!statusUs) {
+                setIsLoad(true)
+                try {
+                    const response = await actualizarUsuarioSolo(usuario)
+                    alert("Actualizacion correcta!!")
+                    setIsLoad(false)
+                } catch (error) {
+                    alert("Error!!")
+                    setIsLoad(false)
+                }
+            } else {
+                alert(mensajeUs)
             }
             console.log("Si existe usuario")
         } else {
             console.log("No existe usuario")
-            setIsLoad(true)
-            try {
-                const response = await registrarUsuarioSolo(usuario)
-                console.log(usuario)
-                alert("Registro correcto!!")
-                setIsLoad(false)
-            } catch (error) {
-                alert("Error!!")
-                setIsLoad(false)
+            if (!statusUs) {
+                setIsLoad(true)
+                try {
+                    const response = await registrarUsuarioSolo(usuario)
+                    console.log(usuario)
+                    alert("Registro correcto!!")
+                    setIsLoad(false)
+                } catch (error) {
+                    alert("Error!!")
+                    setIsLoad(false)
+                }
+            } else {
+                alert(mensajeUs)
             }
         }
     }
