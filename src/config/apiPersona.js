@@ -49,4 +49,35 @@ API_TEST.actualizarPersonaEr = async (persona) => {
     }
 }
 
+API_TEST.compararPersonasVentas = async (datos) => {
+    let response = await fetch(`${API_URL}comparar_ventas_personas`, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        Accept: 'application/json',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
+    })
+    if (response.ok) {
+        return await response.json()
+    } else {
+        return await response.json().then((err) => { throw err; });
+    }
+}
+
+API_TEST.compararCiudadesVentas = async (datos) => {
+    let response = await fetch(`${API_URL}comparar_ventas_ciudades`, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        Accept: 'application/json',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
+    })
+    if (response.ok) {
+        return await response.json()
+    } else {
+        return await response.json().then((err) => { throw err; });
+    }
+}
 module.exports = API_TEST

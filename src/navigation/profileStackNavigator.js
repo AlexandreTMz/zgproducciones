@@ -20,6 +20,7 @@ import { ReporteCuotaDiaria } from './../pages/vendedor/reporteCuota';
 //get data
 import { getData } from './../config/token'
 import { VersusPersona } from '../pages/supervisor/versusPersona';
+import { VersusCiudad } from '../pages/supervisor/versusCiudad';
 
 const ProfileStack = createDrawerNavigator();
 const ProfileStackScreen = (props) => {
@@ -94,6 +95,13 @@ const ProfileStackScreen = (props) => {
     },
     {
       tipo: 1,
+      componente: VersusCiudad,
+      name: "Comparar ciudades",
+      key: "ventasciud",
+      icon: "people"
+    },
+    {
+      tipo: 1,
       componente: UsuarioSupervisor,
       name: "Superviosr",
       key: "supervisor",
@@ -124,7 +132,7 @@ const ProfileStackScreen = (props) => {
 
   const allowPages = pagesForUser.filter(item => item.tipo !== parseInt(type));
 
-  return (
+  const userSupervisor = () => (
     <ProfileStack.Navigator
       drawerContentOptions={{
         activeTintColor: '#535c68',
@@ -136,24 +144,36 @@ const ProfileStackScreen = (props) => {
         (props) => <CustomDrawerContent props={props} setIsLogen={1} />
       }
     >
-      {
-        allowPages.map((e) => (
-          <ProfileStack.Screen key={e.key} name={e.name} component={e.componente}
-            options={
-              {
-                drawerIcon: config =>
-                  <Icon
-                    size={23}
-                    name={e.icon}
-                    color={'#7ed6df'}
-                  >
-                  </Icon>
-              }
-            }
-          />
-        ))
-      }
+      <ProfileStack.Screen key={"supervisor"} name={"Home"} component={UsuarioSupervisor} />
+      <ProfileStack.Screen key={"perfilSupervisor"} name={"Perfil Supervisor"} component={PerfilSupervisor} />
+      <ProfileStack.Screen key={"persona"} name={"Agregar persona"} component={Persona} />
+      <ProfileStack.Screen key={"cuotas"} name={"Operaciones"} component={Operaciones} />
+      <ProfileStack.Screen key={"reporteventa"} name={"Reportes"} component={ReporteVentas} />
+      <ProfileStack.Screen key={"ventascomp"} name={"Comparar ventas"} component={VersusPersona} />
+      <ProfileStack.Screen key={"ventasciud"} name={"Comparar ciudades"} component={VersusCiudad} />
     </ProfileStack.Navigator>
+  )
+
+  const userVendedor = () => (
+    <ProfileStack.Navigator
+      drawerContentOptions={{
+        activeTintColor: '#535c68',
+        itemStyle: {
+          marginVertical: 5
+        },
+      }}
+      drawerContent={
+        (props) => <CustomDrawerContent props={props} setIsLogen={1} />
+      }
+    >
+      <ProfileStack.Screen key={"vendedor"} name={"Home"} component={UsuarioVendedor} />
+      <ProfileStack.Screen key={"perfilVendedor"} name={"Perfil Vendedor"} component={PerfilVendedor} />
+      <ProfileStack.Screen key={"cuetaDiaria"} name={"Cuota diaria"} component={CuotaDiaria} />
+      <ProfileStack.Screen key={"reporteCuota"} name={"Reporte Cuota"} component={ReporteCuotaDiaria} />
+    </ProfileStack.Navigator>
+  )
+  return (
+    parseInt(type) === 1 ? userSupervisor() : userVendedor()
   )
 };
 

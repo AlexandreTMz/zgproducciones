@@ -174,16 +174,24 @@ export default function EditarPersonaModal({ modalVisible, setModalVisible, id_p
                                 style={{ ...pickerSelectStyles }}
                                 items={[
                                     {
-                                        label: 'Chincha',
+                                        label: 'Sunampe',
                                         value: 1
                                     },
                                     {
-                                        label: 'Ica',
+                                        label: 'Chincha alta',
                                         value: 2
                                     },
                                     {
-                                        label: 'Sunampe',
+                                        label: 'Pueblo nuevo',
                                         value: 3
+                                    },
+                                    {
+                                        label: 'Grocio prado',
+                                        value: 4
+                                    },
+                                    {
+                                        label: 'El carmen',
+                                        value: 5
                                     },
                                 ]}
                                 value={parseInt(persona.id_ciudad)}

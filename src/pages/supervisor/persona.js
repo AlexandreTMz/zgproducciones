@@ -22,6 +22,7 @@ import { set } from 'react-native-reanimated';
 export const Persona = () => {
 
     useEffect(() => {
+        setPressButton(false)
         LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
     }, [])
 
@@ -45,20 +46,96 @@ export const Persona = () => {
     const [isEnabled, setIsEnabled] = useState(false);
     const [pressButton, setPressButton] = useState(false);
 
-    const registrarPersona = async() => {
-        setPressButton(true)
-        try {
-            const response =  await registrarPersonaUsuario({ persona, usuario })
-            //console.log({ persona, usuario })
-            setPersona({})
-            setUsuario({})
-            alert("Registro correcto!")
-            setPressButton(false)
-        } catch (error) {
-            console.log(error)
-            alert("Error!!!")
-            setPressButton(false)
+    const registrarPersona = async () => {
+        let { mensaje, status } = validarInputsPersona()
+        let { mensajeUs, statusUs } = validarInputsUsuario()
+        if (!status) {
+            if (isEnabled) {
+                if (!statusUs) {
+                    try {
+                        const response = await registrarPersonaUsuario({ persona, usuario })
+                        //console.log({ persona, usuario })
+                        setPersona({})
+                        setUsuario({})
+                        alert("Registro correcto!")
+                        setPressButton(false)
+                    } catch (error) {
+                        console.log(error)
+                        alert("Error!!!")
+                        setPressButton(false)
+                    }
+                } else {
+                    alert(mensajeUs)
+                }
+            } else {
+                try {
+                    const response = await registrarPersonaUsuario({ persona, usuario })
+                    //console.log({ persona, usuario })
+                    setPersona({})
+                    setUsuario({})
+                    alert("Registro correcto!")
+                    setPressButton(false)
+                } catch (error) {
+                    console.log(error)
+                    alert("Error!!!")
+                    setPressButton(false)
+                }
+            }
+        } else {
+            alert(mensaje)
         }
+    }
+
+    const validarInputsPersona = () => {
+        let response = {
+            mensaje: "Complete los siguientes datos:\n",
+            status: false
+        }
+        if (!persona.pe_nombre) {
+            response.mensaje += "- Nombre\n"
+            response.status = true
+        }
+        if (!persona.pe_apellido_materno) {
+            response.mensaje += "- Apellido materno\n"
+            response.status = true
+        }
+        if (!persona.pe_apellido_paterno) {
+            response.mensaje += "- Apellido paterno\n"
+            response.status = true
+        }
+        if (!persona.pe_fecha_nacimiento) {
+            response.mensaje += "- Fecha de nacimiento\n"
+            response.status = true
+        }
+        if (!persona.pe_dni) {
+            response.mensaje += "- DNI\n"
+            response.status = true
+        }
+        if (!persona.pe_codigo) {
+            response.mensaje += "- Codigo\n"
+            response.status = true
+        }
+        return response
+    }
+
+    const validarInputsUsuario = () => {
+        let response = {
+            mensajeUs: "Complete los siguientes datos:\n",
+            statusUs: false
+        }
+        if (!usuario.usuario) {
+            response.mensajeUs += "- Usuario\n"
+            response.statusUs = true
+        }
+        if (!usuario.contrasenia) {
+            response.mensajeUs += "- Contraseña\n"
+            response.statusUs = true
+        }
+        if (!persona.tipoUsuario) {
+            response.mensajeUs += "- Tipo de usuario\n"
+            response.statusUs = true
+        }
+        return response
     }
 
     const renderUsuario = () => {
@@ -110,11 +187,11 @@ export const Persona = () => {
                                 items={[
                                     {
                                         label: 'Supervisor',
-                                        value: 2
+                                        value: 1
                                     },
                                     {
                                         label: 'Empleado',
-                                        value: 1
+                                        value: 2
                                     }
                                 ]}
                                 value={usuario.tipoUsuario}

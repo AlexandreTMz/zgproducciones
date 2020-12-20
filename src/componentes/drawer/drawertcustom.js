@@ -61,7 +61,7 @@ const CustomDrawerContent = ({ props }) => {
                                     Usuario: {usuario.us_nombre}
                                 </Text>
                                 <Text style={styles.headerText}>
-                                    Perfil: {parseInt(usuario.us_tipo) === 1 ? 'Vendedor' : 'Supervisor'}
+                                    Perfil: {parseInt(usuario.us_tipo) === 2 ? 'Vendedor' : 'Supervisor'}
                                 </Text>
                             </View>
                         </View>

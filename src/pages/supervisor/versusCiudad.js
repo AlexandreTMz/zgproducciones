@@ -13,49 +13,48 @@ import { Picker } from '@react-native-picker/picker';
 
 import { ButtonSuccess } from './../../componentes/button/buttonSuccess';
 
-import { listarPersonas, compararPersonasVentas } from './../../config/apiPersona'
+import { compararCiudadesVentas } from './../../config/apiPersona'
 
-export const VersusPersona = () => {
-    const [personas, setPersonas] = useState([])
+export const VersusCiudad = () => {
 
-    const [persona1, setPersona1] = useState({
+    const ciudades = [
+        {
+            label: 'Sunampe',
+            value: 1
+        },
+        {
+            label: 'Chincha alta',
+            value: 2
+        },
+        {
+            label: 'Pueblo nuevo',
+            value: 3
+        },
+        {
+            label: 'Grocio prado',
+            value: 4
+        },
+        {
+            label: 'El carmen',
+            value: 5
+        },
+    ]
+
+    const [ciudad1, setCiudad1] = useState({
         ventas: 0
     })
-    const [persona2, setPersona2] = useState({
+    const [ciudad2, setCiudad2] = useState({
         ventas: 0
     })
-
-    useEffect(() => {
-        listaDePersonas()
-        //console.log("Ingreso")
-        LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-    }, [])
-
-    const listaDePersonas = async () => {
-        try {
-            const response = await listarPersonas()
-            let data = []
-            response.map((e) => {
-                data.push({
-                    value: e.id_persona,
-                    label: `${e.pe_nombre} ${e.pe_apellido_paterno} ${e.pe_apellido_materno}`
-                })
-            })
-            //console.log(data)
-            setPersonas(data)
-        } catch (error) {
-
-        }
-    }
 
     const comparar_persona = async () => {
         try {
-            const response = await compararPersonasVentas({
-                id_persona1: persona1?.value,
-                id_persona2: persona2?.value
+            const response = await compararCiudadesVentas({
+                ciudad1: ciudad1?.value,
+                ciudad2: ciudad2?.value
             })
-            setPersona1({ ...persona1, ventas: response.persona1 })
-            setPersona2({ ...persona2, ventas: response.persona2 })
+            setCiudad1({ ...ciudad1, ventas: response.ciudad1 })
+            setCiudad2({ ...ciudad2, ventas: response.ciudad2 })
             console.log(response)
         } catch (error) {
             console.log(error)
@@ -73,46 +72,46 @@ export const VersusPersona = () => {
                         <View style={[stylesRow.formRow2, { marginRight: 15 }]}>
                             <View style={{ borderWidth: 1, borderColor: 'red', borderRadius: 4 }}>
                                 <Picker
-                                    selectedValue={persona1?.value}
+                                    selectedValue={ciudad1?.value}
                                     style={{ height: 50, width: '100%', borderColor: 'black' }}
                                     onValueChange={(itemValue, itemIndex) => {
-                                        setPersona1({ ...persona1, value: itemValue, label: itemIndex })
+                                        setCiudad1({ ...ciudad1, value: itemValue, label: itemIndex })
                                     }
                                     }
                                 >
-                                    {personas.map((i, index) => (
+                                    {ciudades.map((i, index) => (
                                         <Picker.Item key={index} label={i.label} value={i.value} />
                                     ))}
                                 </Picker>
                             </View>
                             <Image style={styles.imgLogo}
-                                source={require('./../../imagenes/profile.png')}></Image>
+                                source={require('./../../imagenes/map.png')}></Image>
                             <View style={[stylesRow.formRow, { alignItems: 'center' }]}>
                                 <Text style={{ fontSize: 20, marginTop: 10 }}>
-                                    Ventas: {persona1?.ventas}
+                                    Ventas: {ciudad1?.ventas}
                                 </Text>
                             </View>
                         </View>
                         <View style={stylesRow.formRow2}>
                             <View style={{ borderWidth: 1, borderColor: 'red', borderRadius: 4 }}>
                                 <Picker
-                                    selectedValue={persona2?.value}
+                                    selectedValue={ciudad2?.value}
                                     style={{ height: 50, width: '100%', borderColor: 'black' }}
                                     onValueChange={(itemValue, itemIndex) => {
-                                        setPersona2({ ...persona2, value: itemValue, label: itemIndex })
+                                        setCiudad2({ ...ciudad2, value: itemValue, label: itemIndex })
                                     }
                                     }
                                 >
-                                    {personas.map((i, index) => (
+                                    {ciudades.map((i, index) => (
                                         <Picker.Item key={index} label={i.label} value={i.value} />
                                     ))}
                                 </Picker>
                             </View>
                             <Image style={styles.imgLogo}
-                                source={require('./../../imagenes/profile.png')}></Image>
+                                source={require('./../../imagenes/map.png')}></Image>
                             <View style={[stylesRow.formRow, { alignItems: 'center' }]}>
                                 <Text style={{ fontSize: 20, marginTop: 10 }}>
-                                    Ventas: {persona2?.ventas}
+                                    Ventas: {ciudad2?.ventas}
                                 </Text>
                             </View>
                         </View>

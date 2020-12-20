@@ -27,7 +27,7 @@ export const Operaciones = () => {
         try {
             const respose = await listarPersonas();
             setPersonas(respose)
-            //console.log(respose)
+            console.log(respose)
         } catch (error) {
             console.log(error)
         }
@@ -46,11 +46,13 @@ export const Operaciones = () => {
                 //style={{width:'100%'}}
                 data={personas}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => <ListViewPersona
-                    title={item.pe_nombre}
-                    description={item.pe_codigo}
-                    id_persona={item.id_persona}
-                />}
+                renderItem={({ item }) =>
+                    <ListViewPersona
+                        title={`${item.pe_nombre} ${item.pe_apellido_paterno} ${item.pe_apellido_materno}`}
+                        description={item.pe_codigo}
+                        id_persona={item.id_persona}
+                    />
+                }
                 refreshControl={
                     <RefreshControl
                         refreshing={isFetching}
