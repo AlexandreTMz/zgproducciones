@@ -57,7 +57,7 @@ export const AgregarCuota = ({ id_persona }) => {
                             onChangeText={
                                 text => setCuota({ ...cuota, n_pre: text })
                             }
-                            value={cuota?.n_pre.toString()}
+                            value={cuota.n_pre?.toString()}
                         />
                     </View>
                 </View>
@@ -74,7 +74,7 @@ export const AgregarCuota = ({ id_persona }) => {
                             onChangeText={
                                 text => setCuota({ ...cuota, n_post: text })
                             }
-                            value={cuota?.n_post.toString()}
+                            value={cuota.n_post?.toString()}
                         />
                     </View>
                 </View>
@@ -91,7 +91,7 @@ export const AgregarCuota = ({ id_persona }) => {
                             onChangeText={
                                 text => setCuota({ ...cuota, p_pre: text })
                             }
-                            value={cuota?.p_pre.toString()}
+                            value={cuota.p_pre?.toString()}
                         />
                     </View>
                 </View>
@@ -108,7 +108,7 @@ export const AgregarCuota = ({ id_persona }) => {
                             onChangeText={
                                 text => setCuota({ ...cuota, p_post: text })
                             }
-                            value={cuota?.p_post.toString()}
+                            value={cuota.p_post?.toString()}
                         />
                     </View>
                 </View>
@@ -127,7 +127,7 @@ export const AgregarCuota = ({ id_persona }) => {
                                     onChangeText={
                                         text => setCuota({ ...cuota, inicio: text })
                                     }
-                                    value={cuota?.inicio}
+                                    value={cuota.inicio}
                                     style={styles.inputView}
                                     placeholder="YYYY/MM/DD"
                                 />
@@ -146,7 +146,7 @@ export const AgregarCuota = ({ id_persona }) => {
                                     onChangeText={
                                         text => setCuota({ ...cuota, fin: text })
                                     }
-                                    value={cuota?.fin}
+                                    value={cuota.fin}
                                     style={styles.inputView}
                                     placeholder="YYYY/MM/DD"
                                 />
