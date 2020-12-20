@@ -58,11 +58,11 @@ export default function EditarUsuarioModal({ modalVisible, setModalVisible, id_p
             mensajeUs: "Complete los siguientes datos:\n",
             statusUs: false
         }
-        if (!usuario.usuario) {
+        if (!usuario.us_nombre) {
             response.mensajeUs += "- Usuario\n"
             response.statusUs = true
         }
-        if (!usuario.contrasenia) {
+        if (!usuario.us_contrasenia) {
             response.mensajeUs += "- Contraseña\n"
             response.statusUs = true
         }
