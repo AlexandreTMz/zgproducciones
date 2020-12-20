@@ -133,9 +133,9 @@ export const ReporteVentas = () => {
             let datasets = []
             response.map((e) => {
                 labels.push(e.mes)
-                datasets.push(e.cantidad)
+                datasets.push(parseInt(e.cantidad))
             })
-            console.log(labels)
+            console.log(labels, datasets)
             setDataSet({ ...dataSet, labels: labels, datasets: datasets })
         } catch (error) {
             console.log(error)
@@ -339,7 +339,7 @@ export const ReporteVentas = () => {
                 />
 
                 <Text style={styles.textInfo}>
-                    Compras por fechas
+                    Compras por mes
                 </Text>
 
                 <LineChart

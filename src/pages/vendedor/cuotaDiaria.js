@@ -279,7 +279,7 @@ export const CuotaDiaria = () => {
                                         paddingBottom: 10
                                     }}
                                 >
-                                    Jose Gonzales
+                                    Mi ubicacion
                                 </Text>
                             </View>
                         </Marker>
