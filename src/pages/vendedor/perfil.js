@@ -58,6 +58,8 @@ export const PerfilVendedor = () => {
                         <TextInput
                             style={styles.inputView}
                             value={persona.pe_nombre}
+                            editable={false}
+                            selectTextOnFocus={false}
                             onChangeText={
                                 text => setPersona({ ...persona, pe_nombre: text })
                             }
@@ -74,6 +76,8 @@ export const PerfilVendedor = () => {
                                 <TextInput
                                     style={styles.inputView}
                                     value={persona.pe_apellido_paterno}
+                                    editable={false}
+                                    selectTextOnFocus={false}
                                     onChangeText={
                                         text => setPersona({ ...persona, pe_apellido_paterno: text })
                                     }
@@ -88,6 +92,8 @@ export const PerfilVendedor = () => {
                                 <TextInput
                                     style={styles.inputView}
                                     value={persona.pe_apellido_materno}
+                                    editable={false}
+                                    selectTextOnFocus={false}
                                     onChangeText={
                                         text => setPersona({ ...persona, pe_apellido_materno: text })
                                     }
@@ -118,6 +124,8 @@ export const PerfilVendedor = () => {
                                 text => setPersona({ ...persona, pe_dni: text })
                             }
                             style={styles.inputView}
+                            editable={false}
+                            selectTextOnFocus={false}
                         />
                     </View>
                 </View>
@@ -139,6 +147,8 @@ export const PerfilVendedor = () => {
                             }
                             style={styles.inputView}
                             placeholder="YYYY/MM/DD"
+                            editable={false}
+                            selectTextOnFocus={false}
                         />
                     </View>
                 </View>
@@ -149,6 +159,7 @@ export const PerfilVendedor = () => {
                     </Text>
                         <RNPickerSelect
                             key={parseInt(persona?.id_ciudad)}
+                            disabled={true}
                             placeholder={{
                                 label: 'Seleccione un distrito...',
                                 value: null,

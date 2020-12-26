@@ -29,6 +29,9 @@ export function UsuarioProvider(props) {
             }
         }
         isLogged()
+        return () =>{
+            console.log("clear")
+        }
     }, []);
 
     const login = async (data) => {

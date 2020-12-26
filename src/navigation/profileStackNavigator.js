@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { View } from 'react-native'
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Icon from 'react-native-vector-icons/Ionicons';
 // DRAWER CUSTOM
@@ -21,6 +22,8 @@ import { ReporteCuotaDiaria } from './../pages/vendedor/reporteCuota';
 import { getData } from './../config/token'
 import { VersusPersona } from '../pages/supervisor/versusPersona';
 import { VersusCiudad } from '../pages/supervisor/versusCiudad';
+import { Ubicacion } from '../pages/supervisor/ubicacion';
+import { ReporteCuotaDiariaSup } from '../pages/supervisor/reporteCuotaSup';
 
 const ProfileStack = createDrawerNavigator();
 const ProfileStackScreen = (props) => {
@@ -132,44 +135,246 @@ const ProfileStackScreen = (props) => {
 
   const allowPages = pagesForUser.filter(item => item.tipo !== parseInt(type));
 
+
+  const addIconReturn = (icon) => {
+    let data = {
+      drawerIcon: (config) => {
+        <Icon
+          size={23}
+          name={icon}
+          color={'#7ed6df'}
+        >
+        </Icon>
+      }
+    }
+    return data
+  }
+
+  const colorIconAct = "#ff7675";
+  const colorIconIct = "#636e72";
+
   const userSupervisor = () => (
     <ProfileStack.Navigator
+      labelStyle={{
+        fontSize: 14,
+        fontFamily: 'OpenSans-SemiBold'
+      }}
       drawerContentOptions={{
-        activeTintColor: '#535c68',
+        activeBackgroundColor: "#F1F1F1",
+        activeTintColor: "#000000",
+        inactiveTintColor: "#818181",
         itemStyle: {
-          marginVertical: 5
-        },
+          marginLeft: 0,
+          paddingHorizontal: 10,
+          width: '100%',
+          borderRadius: 0
+        }
+      }}
+      indicatorStyle={{
+        borderBottomWidth: 2,
+        borderBottomColor: 'red',
       }}
       drawerContent={
         (props) => <CustomDrawerContent props={props} setIsLogen={1} />
       }
     >
-      <ProfileStack.Screen key={"supervisor"} name={"Home"} component={UsuarioSupervisor} />
-      <ProfileStack.Screen key={"perfilSupervisor"} name={"Perfil Supervisor"} component={PerfilSupervisor} />
-      <ProfileStack.Screen key={"persona"} name={"Agregar persona"} component={Persona} />
-      <ProfileStack.Screen key={"cuotas"} name={"Operaciones"} component={Operaciones} />
-      <ProfileStack.Screen key={"reporteventa"} name={"Reportes"} component={ReporteVentas} />
-      <ProfileStack.Screen key={"ventascomp"} name={"Comparar ventas"} component={VersusPersona} />
-      <ProfileStack.Screen key={"ventasciud"} name={"Comparar ciudades"} component={VersusCiudad} />
+      <ProfileStack.Screen key={"supervisor"} name={"Home"} component={UsuarioSupervisor}
+        options={
+          {
+            drawerIcon: ({ focused, size }) =>
+              <Icon
+                size={23}
+                name={"home"}
+                color={(focused) ? colorIconAct : colorIconIct}
+              >
+              </Icon>
+          }
+        }
+      />
+      <ProfileStack.Screen key={"perfilSupervisor"} name={"Perfil Supervisor"} component={PerfilSupervisor}
+        options={
+          {
+            drawerIcon: ({ focused, size }) =>
+              <Icon
+                size={23}
+                name={"people"}
+                color={(focused) ? colorIconAct : colorIconIct}
+              >
+              </Icon>
+          }
+        }
+      />
+      <ProfileStack.Screen key={"persona"} name={"Agregar persona"} component={Persona}
+        options={
+          {
+            drawerIcon: ({ focused, size }) =>
+              <Icon
+                size={23}
+                name={"people"}
+                color={(focused) ? colorIconAct : colorIconIct}
+              >
+              </Icon>
+          }
+        }
+      />
+      <ProfileStack.Screen key={"cuotas"} name={"Operaciones"} component={Operaciones}
+        options={
+          {
+            drawerIcon: ({ focused, size }) =>
+              <Icon
+                size={23}
+                name={"bar-chart"}
+                color={(focused) ? colorIconAct : colorIconIct}
+              >
+              </Icon>
+          }
+        }
+      />
+      <ProfileStack.Screen key={"reporteventa"} name={"Reportes venta"} component={ReporteVentas}
+        options={
+          {
+            drawerIcon: ({ focused, size }) =>
+              <Icon
+                size={23}
+                name={"archive"}
+                color={(focused) ? colorIconAct : colorIconIct}
+              >
+              </Icon>
+          }
+        }
+      />
+      <ProfileStack.Screen key={"reportevendedor"} name={"Reporte cuota"} component={ReporteCuotaDiariaSup}
+        options={
+          {
+            drawerIcon: ({ focused, size }) =>
+              <Icon
+                size={23}
+                name={"barcode"}
+                color={(focused) ? colorIconAct : colorIconIct}
+              >
+              </Icon>
+          }
+        }
+      />
+      <ProfileStack.Screen key={"ventascomp"} name={"Comparar ventas"} component={VersusPersona}
+        options={
+          {
+            drawerIcon: ({ focused, size }) =>
+              <Icon
+                size={23}
+                name={"cash-outline"}
+                color={(focused) ? colorIconAct : colorIconIct}
+              >
+              </Icon>
+          }
+        }
+      />
+      <ProfileStack.Screen key={"ventasciud"} name={"Comparar ciudades"} component={VersusCiudad}
+        options={
+          {
+            drawerIcon: ({ focused, size }) =>
+              <Icon
+                size={23}
+                name={"globe-outline"}
+                color={(focused) ? colorIconAct : colorIconIct}
+              >
+              </Icon>
+          }
+        }
+      />
+      <ProfileStack.Screen key={"ubicacion"} name={"Ubicacion"} component={Ubicacion}
+        options={
+          {
+            drawerIcon: ({ focused, size }) =>
+              <Icon
+                size={23}
+                name={"golf"}
+                color={(focused) ? colorIconAct : colorIconIct}
+              >
+              </Icon>
+          }
+        }
+      />
     </ProfileStack.Navigator>
   )
 
   const userVendedor = () => (
     <ProfileStack.Navigator
+      labelStyle={{
+        fontSize: 14,
+        fontFamily: 'OpenSans-SemiBold'
+      }}
       drawerContentOptions={{
-        activeTintColor: '#535c68',
+        activeBackgroundColor: "#F1F1F1",
+        activeTintColor: "#000000",
+        inactiveTintColor: "#818181",
         itemStyle: {
-          marginVertical: 5
-        },
+          marginLeft: 0,
+          paddingHorizontal: 10,
+          width: '100%',
+          borderRadius: 0
+        }
+      }}
+      indicatorStyle={{
+        borderBottomWidth: 2,
+        borderBottomColor: 'red',
       }}
       drawerContent={
         (props) => <CustomDrawerContent props={props} setIsLogen={1} />
       }
     >
-      <ProfileStack.Screen key={"vendedor"} name={"Home"} component={UsuarioVendedor} />
-      <ProfileStack.Screen key={"perfilVendedor"} name={"Perfil Vendedor"} component={PerfilVendedor} />
-      <ProfileStack.Screen key={"cuetaDiaria"} name={"Cuota diaria"} component={CuotaDiaria} />
-      <ProfileStack.Screen key={"reporteCuota"} name={"Reporte Cuota"} component={ReporteCuotaDiaria} />
+      <ProfileStack.Screen key={"vendedor"} name={"Home"} component={UsuarioVendedor}
+        options={
+          {
+            drawerIcon: ({ focused, size }) =>
+              <Icon
+                size={23}
+                name={"home"}
+                color={(focused) ? colorIconAct : colorIconIct}
+              >
+              </Icon>
+          }
+        }
+      />
+      <ProfileStack.Screen key={"perfilVendedor"} name={"Perfil Vendedor"} component={PerfilVendedor}
+        options={
+          {
+            drawerIcon: ({ focused, size }) =>
+              <Icon
+                size={23}
+                name={"people"}
+                color={(focused) ? colorIconAct : colorIconIct}
+              >
+              </Icon>
+          }
+        }
+      />
+      <ProfileStack.Screen key={"cuetaDiaria"} name={"Cuota diaria"} component={CuotaDiaria}
+        options={
+          {
+            drawerIcon: ({ focused, size }) =>
+              <Icon
+                size={23}
+                name={"location"}
+                color={(focused) ? colorIconAct : colorIconIct}
+              >
+              </Icon>
+          }
+        }
+      />
+      <ProfileStack.Screen key={"reporteCuota"} name={"Reporte Cuota"} component={ReporteCuotaDiaria}
+        options={
+          {
+            drawerIcon: ({ focused, size }) =>
+              <Icon
+                size={23}
+                name={"layers"}
+                color={(focused) ? colorIconAct : colorIconIct}
+              >
+              </Icon>
+          }
+        }
+      />
     </ProfileStack.Navigator>
   )
   return (

@@ -106,4 +106,20 @@ API_TEST.buscarCuotaDiaria = async (cuota) => {
     }
 }
 
+API_TEST.buscarCuotaDiariaUbicacion = async (cuota) => {
+    let response = await fetch(`${API_URL}buscar_cuota_diaria_ubicacion`, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        Accept: 'application/json',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(cuota)
+    })
+    if (response.ok) {
+        return await response.json()
+    } else {
+        return await response.json().then((err) => { throw err; });
+    }
+}
+
 module.exports = API_TEST

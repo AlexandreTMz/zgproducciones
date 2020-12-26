@@ -338,6 +338,10 @@ export const ReporteVentas = () => {
                     absolute //for the absolute number remove if you want percentage
                 />
 
+                <Text style={{ padding: 10, width: '100%', backgroundColor: '#e4e6e8', color: '#242729', textAlign: 'center' }}>
+                Le quedan <Text style={{ color: 'red' }}>{(ventas.vender - ventas.vendido)}</Text> ventas por completar!
+                </Text>
+
                 <Text style={styles.textInfo}>
                     Compras por mes
                 </Text>

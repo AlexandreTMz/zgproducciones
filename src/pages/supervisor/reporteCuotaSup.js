@@ -17,16 +17,20 @@ import {
 import { TextInputMask } from 'react-native-masked-text'
 
 import { ModalMapaVendedor } from './../../componentes/modal/modalMapa'
+import { Picker } from '@react-native-picker/picker';
 
 //tyoken
 import { getData } from './../../config/token'
 import { buscarCuotaDiaria } from './../../config/apiCuotaDiaria'
+import { listarPersonas } from './../../config/apiPersona'
 
-export const ReporteCuotaDiaria = () => {
+export const ReporteCuotaDiariaSup = () => {
 
     const [modalVisibleVeMap, setModalVisibleVeMap] = useState(false);
     const [tableData, setTableData] = useState([]);
-    const [persona, setPersona] = useState({});
+    const [selectPersona, setSelectPersona] = useState({})
+    const [personas, setPersonas] = useState([])
+
     const [fecha, setFecha] = useState({
         fecha_inicio: '',
         fecha_final: '',
@@ -37,29 +41,31 @@ export const ReporteCuotaDiaria = () => {
     const [mapa, setMapa] = useState({})
 
     useEffect(() => {
-        let isMounted = true;
-        const getDataUser = async () => {
-            try {
-                const data = await getData();
-                if (data) {
-                    console.log(data)
-                    setPersona({ ...persona, ...data })
-                }
-            } catch (e) {
-                console.log(e)
-            }
-        }
-        getDataUser();
-        return () => {
-            isMounted = false
-        };
+        listaDePersonas()
     }, []);
+
+    const listaDePersonas = async () => {
+        try {
+            const response = await listarPersonas()
+            let data = []
+            response.map((e) => {
+                data.push({
+                    value: e.id_persona,
+                    label: `${e.pe_nombre} ${e.pe_apellido_paterno} ${e.pe_apellido_materno}`
+                })
+            })
+            //console.log(data)
+            setPersonas(data)
+        } catch (error) {
+
+        }
+    }
 
     const buscarReporte = async () => {
         setIsLoading(true)
         try {
             const response = await buscarCuotaDiaria({
-                id_persona: persona.id_persona,
+                id_persona: selectPersona.value,
                 fecha_inicio: fecha.fecha_inicio,
                 fecha_final: fecha.fecha_final
             });
@@ -132,6 +138,29 @@ export const ReporteCuotaDiaria = () => {
                     <Text style={[styles.textInfo, { marginBottom: 15 }]}>
                         Establecer fechas
                     </Text>
+                </View>
+                <View style={styles.formRow}>
+                    <View
+                        style={{
+                            backgroundColor: '#f6f6f6',
+                            borderWidth: 1,
+                            borderColor: '#73c5ff',
+                            borderRadius: 4,
+                            width: '100%',
+                        }}
+                    >
+                        <Picker
+                            selectedValue={selectPersona?.value}
+                            style={{ height: 40, width: '100%', borderColor: 'black' }}
+                            onValueChange={(itemValue, itemIndex) => {
+                                setSelectPersona({ ...selectPersona, value: itemValue, label: itemIndex })
+                            }}
+                        >
+                            {personas.map((i, index) => (
+                                <Picker.Item key={index} label={i.label} value={i.value} />
+                            ))}
+                        </Picker>
+                    </View>
                 </View>
                 <View style={styles.formRow}>
                     <View style={styles.column}>
