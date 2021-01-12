@@ -61,6 +61,8 @@ export const ReporteCuotaDiariaSup = () => {
         }
     }
 
+    let tempTotal = 0;
+    const [total, setTotal] = useState(0)
     const buscarReporte = async () => {
         setIsLoading(true)
         try {
@@ -75,6 +77,11 @@ export const ReporteCuotaDiariaSup = () => {
 
             let temp = []
             response.map((e) => {
+
+                e[5].replace(/(\d+)/g, function(match){
+                    tempTotal +=   Number.parseInt( match, 10)
+                });
+
                 e.push(viewMap(
                     {
                         latitude: e[2],
@@ -84,11 +91,14 @@ export const ReporteCuotaDiariaSup = () => {
                 temp.push(e)
             })
 
+            setTotal(tempTotal)
             setTableData([...tableData, ...temp])
             setIsLoading(false)
             //console.log(temp)
         } catch (e) {
             console.log(e)
+            setTotal(0)
+            setTableData([])
             setIsLoading(false)
             alert("No se encontraron resultados!!")
         }
@@ -221,6 +231,7 @@ export const ReporteCuotaDiariaSup = () => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.formRow}>
+                    <Text>TOTAL: s/{total} soles</Text>
                     <ScrollView horizontal={true}>
                         <View style={{ width: '100%', padding: 10 }}>
                             <Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff' }}>

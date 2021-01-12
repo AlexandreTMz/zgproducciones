@@ -155,6 +155,7 @@ const ProfileStackScreen = (props) => {
 
   const userSupervisor = () => (
     <ProfileStack.Navigator
+      options={{ headerShown: true }}
       labelStyle={{
         fontSize: 14,
         fontFamily: 'OpenSans-SemiBold'
@@ -181,6 +182,7 @@ const ProfileStackScreen = (props) => {
       <ProfileStack.Screen key={"supervisor"} name={"Home"} component={UsuarioSupervisor}
         options={
           {
+            headerShown: true,
             drawerIcon: ({ focused, size }) =>
               <Icon
                 size={23}
@@ -194,6 +196,7 @@ const ProfileStackScreen = (props) => {
       <ProfileStack.Screen key={"perfilSupervisor"} name={"Perfil Supervisor"} component={PerfilSupervisor}
         options={
           {
+            headerShown: true,
             drawerIcon: ({ focused, size }) =>
               <Icon
                 size={23}
@@ -207,6 +210,7 @@ const ProfileStackScreen = (props) => {
       <ProfileStack.Screen key={"persona"} name={"Agregar persona"} component={Persona}
         options={
           {
+            headerShown: true,
             drawerIcon: ({ focused, size }) =>
               <Icon
                 size={23}
@@ -220,6 +224,7 @@ const ProfileStackScreen = (props) => {
       <ProfileStack.Screen key={"cuotas"} name={"Operaciones"} component={Operaciones}
         options={
           {
+            headerShown: true,
             drawerIcon: ({ focused, size }) =>
               <Icon
                 size={23}
@@ -233,6 +238,7 @@ const ProfileStackScreen = (props) => {
       <ProfileStack.Screen key={"reporteventa"} name={"Reportes venta"} component={ReporteVentas}
         options={
           {
+            headerShown: true,
             drawerIcon: ({ focused, size }) =>
               <Icon
                 size={23}
@@ -246,6 +252,7 @@ const ProfileStackScreen = (props) => {
       <ProfileStack.Screen key={"reportevendedor"} name={"Reporte cuota"} component={ReporteCuotaDiariaSup}
         options={
           {
+            headerShown: true,
             drawerIcon: ({ focused, size }) =>
               <Icon
                 size={23}
@@ -259,6 +266,7 @@ const ProfileStackScreen = (props) => {
       <ProfileStack.Screen key={"ventascomp"} name={"Comparar ventas"} component={VersusPersona}
         options={
           {
+            headerShown: true,
             drawerIcon: ({ focused, size }) =>
               <Icon
                 size={23}
@@ -272,6 +280,7 @@ const ProfileStackScreen = (props) => {
       <ProfileStack.Screen key={"ventasciud"} name={"Comparar ciudades"} component={VersusCiudad}
         options={
           {
+            headerShown: true,
             drawerIcon: ({ focused, size }) =>
               <Icon
                 size={23}
@@ -285,6 +294,7 @@ const ProfileStackScreen = (props) => {
       <ProfileStack.Screen key={"ubicacion"} name={"Ubicacion"} component={Ubicacion}
         options={
           {
+            headerShown: true,
             drawerIcon: ({ focused, size }) =>
               <Icon
                 size={23}
@@ -326,6 +336,7 @@ const ProfileStackScreen = (props) => {
       <ProfileStack.Screen key={"vendedor"} name={"Home"} component={UsuarioVendedor}
         options={
           {
+            headerShown: true,
             drawerIcon: ({ focused, size }) =>
               <Icon
                 size={23}
@@ -339,6 +350,7 @@ const ProfileStackScreen = (props) => {
       <ProfileStack.Screen key={"perfilVendedor"} name={"Perfil Vendedor"} component={PerfilVendedor}
         options={
           {
+            headerShown: true,
             drawerIcon: ({ focused, size }) =>
               <Icon
                 size={23}
@@ -352,6 +364,7 @@ const ProfileStackScreen = (props) => {
       <ProfileStack.Screen key={"cuetaDiaria"} name={"Cuota diaria"} component={CuotaDiaria}
         options={
           {
+            headerShown: true,
             drawerIcon: ({ focused, size }) =>
               <Icon
                 size={23}
@@ -365,6 +378,7 @@ const ProfileStackScreen = (props) => {
       <ProfileStack.Screen key={"reporteCuota"} name={"Reporte Cuota"} component={ReporteCuotaDiaria}
         options={
           {
+            headerShown: true,
             drawerIcon: ({ focused, size }) =>
               <Icon
                 size={23}

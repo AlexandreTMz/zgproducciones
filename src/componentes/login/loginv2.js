@@ -99,10 +99,6 @@ export const Loginv2 = () => {
                 Iniciar session
             </ButtonSuccess>
 
-            <ButtonPrimary onPress={getDataUsuario}>
-                Registrarse
-            </ButtonPrimary>
-
         </View>
     )
 }
