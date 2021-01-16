@@ -44,6 +44,7 @@ export const Operaciones = () => {
             <FlatList
                 //style={{ flex: 1, width: '100%' }}
                 //style={{width:'100%'}}
+                contentContainerStyle={{ paddingBottom: 120 }}
                 data={personas}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) =>
