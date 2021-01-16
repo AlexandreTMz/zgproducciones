@@ -46,7 +46,7 @@ export const AgregarCuota = ({ id_persona }) => {
                 alert("Registro correcto!")
             } catch (error) {
                 setIsLoad(false)
-                alert("Error!!")
+                alert("Ya tiene registrado una cuota en esta fecha!!!")
                 console.log(error)
             }
         } else {

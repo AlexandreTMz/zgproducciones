@@ -49,6 +49,7 @@ export const VersusCiudad = () => {
 
     const comparar_persona = async () => {
         try {
+            alert("Consulta exitosa!")
             const response = await compararCiudadesVentas({
                 ciudad1: ciudad1?.value,
                 ciudad2: ciudad2?.value
@@ -57,6 +58,7 @@ export const VersusCiudad = () => {
             setCiudad2({ ...ciudad2, ventas: response.ciudad2 })
             console.log(response)
         } catch (error) {
+            alert("No se encontro resultados!")
             console.log(error)
         }
     }
@@ -73,7 +75,7 @@ export const VersusCiudad = () => {
                             <View style={{ borderWidth: 1, borderColor: 'red', borderRadius: 4 }}>
                                 <Picker
                                     selectedValue={ciudad1?.value}
-                                    style={{ height: 50, width: '100%', borderColor: 'black' }}
+                                    style={{ height: 30, width: '100%', borderColor: 'black' }}
                                     onValueChange={(itemValue, itemIndex) => {
                                         setCiudad1({ ...ciudad1, value: itemValue, label: itemIndex })
                                     }
@@ -96,7 +98,7 @@ export const VersusCiudad = () => {
                             <View style={{ borderWidth: 1, borderColor: 'red', borderRadius: 4 }}>
                                 <Picker
                                     selectedValue={ciudad2?.value}
-                                    style={{ height: 50, width: '100%', borderColor: 'black' }}
+                                    style={{ height: 30, width: '100%', borderColor: 'black' }}
                                     onValueChange={(itemValue, itemIndex) => {
                                         setCiudad2({ ...ciudad2, value: itemValue, label: itemIndex })
                                     }
@@ -125,6 +127,9 @@ export const VersusCiudad = () => {
                     }>
                         Generar comparativa
                     </ButtonSuccess>
+                </View>
+                <View style={{marginBottom:35}}>
+
                 </View>
             </ScrollView>
         </View>

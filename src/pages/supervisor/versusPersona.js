@@ -50,6 +50,7 @@ export const VersusPersona = () => {
 
     const comparar_persona = async () => {
         try {
+            alert("Consulta exitosa!")
             const response = await compararPersonasVentas({
                 id_persona1: persona1?.value,
                 id_persona2: persona2?.value
@@ -58,6 +59,7 @@ export const VersusPersona = () => {
             setPersona2({ ...persona2, ventas: response.persona2 })
             console.log(response)
         } catch (error) {
+            alert("No se encontro resultados!")
             console.log(error)
         }
     }

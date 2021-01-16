@@ -89,12 +89,13 @@ export const ReporteVentas = () => {
         //console.log("Usuario: ", usuario)
         //console.log("Cuotas: ", selectCuota)
         try {
+            alert("Consulta exitosa!")
             const response = await reporte_ventas(usuario)
             console.log("REes: ", response)
             //setVentas({...ventas,...response})
             setVentas({ ...ventas, ...response })
         } catch (error) {
-            alert("Error!")
+            alert("Ocurrio un problema..!")
             console.log(error)
         }
     }
@@ -182,7 +183,7 @@ export const ReporteVentas = () => {
                     <View style={{ borderWidth: 1, borderColor: 'red', borderRadius: 4 }}>
                         <Picker
                             selectedValue={selectCuota?.value}
-                            style={{ height: 50, width: '100%', borderColor: 'black' }}
+                            style={{ height: 40, width: '100%', borderColor: 'black' }}
                             onValueChange={(itemValue, itemIndex) => {
                                 setSelectCuota({ ...selectCuota, value: itemValue, label: itemIndex })
                                 setUsuario({ ...usuario, id_cuota: itemValue })
@@ -339,7 +340,7 @@ export const ReporteVentas = () => {
                 />
 
                 <Text style={{ padding: 10, width: '100%', backgroundColor: '#e4e6e8', color: '#242729', textAlign: 'center' }}>
-                Le quedan <Text style={{ color: 'red' }}>{(ventas.vender - ventas.vendido)}</Text> ventas por completar!
+                    Le quedan <Text style={{ color: 'red' }}>{(ventas.vender - ventas.vendido)}</Text> ventas por completar!
                 </Text>
 
                 <Text style={styles.textInfo}>
